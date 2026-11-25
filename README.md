@@ -1,11 +1,11 @@
-# 🏥 Migration de Données Médicales vers MongoDB & Déploiement Docker (DataSoluTech)
+#  Migration de Données Médicales vers MongoDB & Déploiement Docker (DataSoluTech)
 
-## 📋 Contexte du projet
+##  Contexte du projet
 Ce projet a été réalisé dans le cadre d'une mission de Data Engineering pour **DataSoluTech**. L'objectif est de migrer un jeu de données médicales de patients (`healthcare_dataset.csv`, 55 500 enregistrements) vers une base de données NoSQL **MongoDB** scalable horizontalement, le tout entièrement conteneurisé avec **Docker** et validé par des tests automatisés.
 
 ---
 
-## 🏗️ Architecture du projet
+##  Architecture du projet
 ```text
 datasolutech-migration/
 ├── data/
@@ -23,7 +23,7 @@ datasolutech-migration/
 
 ---
 
-## 🗄️ Schéma de la base de données (`datasolutech_medical`)
+##  Schéma de la base de données (`datasolutech_medical`)
 Plutôt que de conserver une structure tabulaire à plat (15 colonnes), les données ont été modélisées sous forme de **documents JSON imbriqués** dans la collection `admissions` afin d'optimiser les performances de lecture et regrouper les informations logiques :
 
 ```json
@@ -59,7 +59,7 @@ Plutôt que de conserver une structure tabulaire à plat (15 colonnes), les donn
 
 ---
 
-## 🔐 Authentification et gestion des rôles (RBAC)
+##  Authentification et gestion des rôles (RBAC)
 Conformément aux bonnes pratiques de sécurité et au **principe du moindre privilège** appliqué aux données médicales, l'accès à MongoDB est protégé par authentification avec trois profils distincts configurés via `mongo-init/init-users.js` :
 
 | Utilisateur | Rôle MongoDB | Base ciblée | Permissions et usage |
@@ -70,7 +70,7 @@ Conformément aux bonnes pratiques de sécurité et au **principe du moindre pri
 
 ---
 
-## 🚀 Installation et exécution
+##  Installation et exécution
 
 ### Prérequis
 * [Docker Desktop](https://docker.com) installé et démarré.
@@ -78,7 +78,7 @@ Conformément aux bonnes pratiques de sécurité et au **principe du moindre pri
 ### Lancer la migration et les tests en une commande
 1. Cloner le dépôt et se placer à la racine du projet :
    ```bash
-   git clone <URL_DE_TON_REPO_GITHUB>
+   git clone https://github.com/SamuelBortolotti/Datasolutech
    cd datasolutech-migration
    ```
 2. Démarrer l'infrastructure en arrière-plan :

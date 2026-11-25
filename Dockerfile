@@ -12,5 +12,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 COPY data/ ./data/
 
+# Création d'un utilisateur non-root pour la sécurité du conteneur
+RUN useradd -m appuser && chown -R appuser:appuser /app
+USER appuser
+
 # Commande par défaut : lance la migration puis les tests d'intégrité
 CMD ["sh", "-c", "python src/migrate.py && pytest src/test_migration.py"]

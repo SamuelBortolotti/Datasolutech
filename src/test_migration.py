@@ -4,14 +4,18 @@ import pytest
 from pymongo import MongoClient
 from pymongo.errors import OperationFailure
 
+
 MONGO_HOST = os.getenv("MONGO_HOST", "localhost")
 MONGO_PORT = int(os.getenv("MONGO_PORT", 27017))
 DB_NAME = "datasolutech_medical"
 
+ANALYST_USER = os.getenv("ANALYST_USER", "analyst_user")
+ANALYST_PASS = os.getenv("ANALYST_PASSWORD", "analyst_password_123")
+
 @pytest.fixture
 def db_analyst():
     """Connexion avec le profil Analyste (lecture seule)."""
-    uri = f"mongodb://analyst_user:analyst_password_123@{MONGO_HOST}:{MONGO_PORT}/{DB_NAME}"
+    uri = f"mongodb://{ANALYST_USER}:{ANALYST_PASS}@{MONGO_HOST}:{MONGO_PORT}/{DB_NAME}"
     client = MongoClient(uri)
     yield client[DB_NAME]
     client.close()

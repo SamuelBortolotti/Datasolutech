@@ -6,8 +6,12 @@ services:
     ports:
       - "127.0.0.1:27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      ETL_USER: ${ETL_USER}
+      ETL_PASSWORD: ${ETL_PASSWORD}
+      ANALYST_USER: ${ANALYST_USER}
+      ANALYST_PASSWORD: ${ANALYST_PASSWORD}
     volumes:
       - mongo_data:/data/db
       - ./mongo-init:/docker-entrypoint-initdb.d
@@ -26,10 +30,12 @@ services:
       mongodb:
         condition: service_healthy
     environment:
-      MONGO_HOST: mongodb
-      MONGO_PORT: 27017
-      MONGO_USER: etl_user
-      MONGO_PASS: ${MONGO_ROOT_PASSWORD}
+     MONGO_HOST: mongodb
+     MONGO_PORT: 27017
+     MONGO_USER: ${ETL_USER}
+     MONGO_PASS: ${ETL_PASSWORD}
+     ANALYST_USER: ${ANALYST_USER}
+     ANALYST_PASSWORD: ${ANALYST_PASSWORD}
     networks:
       - datasolutech_net
 

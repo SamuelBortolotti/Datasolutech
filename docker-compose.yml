@@ -7,10 +7,12 @@ services:
       - "127.0.0.1:27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin_password_123
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
       - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - datasolutech_net
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 5s
@@ -27,7 +29,13 @@ services:
       MONGO_HOST: mongodb
       MONGO_PORT: 27017
       MONGO_USER: etl_user
-      MONGO_PASS: etl_password_123
+      MONGO_PASS: ${MONGO_ROOT_PASSWORD}
+    networks:
+      - datasolutech_net
 
 volumes:
   mongo_data:
+
+networks:
+  datasolutech_net:
+    name: datasolutech_net
